@@ -49,6 +49,40 @@ describe("Testing out the formatTitle function", () => {
 })
 
 
+
+// Testing out the shortenBio functionality.
+describe('shortenBio tests', () => {
+  // Let's check to see if the bio actually gets shortened by using toBeLessThan().
+  test('shortenBio should shorten the bio string', () => {
+      let shortBio = shortenBio(testData.bio)
+      expect(shortBio.length).toBeLessThan(testData.bio.length)
+  })
+
+  // Although it's not the best solution, the ellipses (...) should be present when the bio is shortened.
+  // We can check that using the toContaion() method.
+  test('shortenBio should add periods to the end of the string', () => {
+      let shortBio = shortenBio(testData.bio)
+      expect(shortBio).toContain('...')
+  })
+})
+
+// Testing out convertLength functionality.
+describe('convertLength tests', () => {
+  // The length of a converted datetime should be 2.
+  test('convertLength should return an array with length 2', () => {
+      let result = convertLength(testData.length)
+      expect(result).toHaveLength(2)
+  })
+
+  // The function should still be able to handle time under 60.
+  test('convertLength can handle numbers under 60', () => {
+      let result = convertLength(30)
+      expect(result[1]).toEqual(30)
+  })
+})
+
+
+
 // What's the difference between toBe and toEqual?\
 // The answer is data types! Reference types are equated differently than primitive types.
 // However, toEqual works on both primitive and reference types (objects, arrays).
